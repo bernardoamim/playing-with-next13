@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import Link from 'next/link'
 import { User } from './app/components/User'
 
@@ -6,12 +7,12 @@ import { User } from './app/components/User'
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>Hello World</h1>
+      <Link href="/app">Go to Dashboard</Link>
 
-      <Link href="/dashboard">Go to Dashboard</Link>
-
-      {/** @ts-expect-error Async Server Component */}
-      <User />
+      <Suspense fallback={<p>Loading User...</p>}>
+        {/** @ts-expect-error Async Server Component */}
+        <User />
+      </Suspense>
     </main>
   )
 }
